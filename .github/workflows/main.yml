@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: "v${{ matrix.build_env.tag }} - ${{ matrix.build_env.pkgarch}} :: ${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}} build"
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         build_env:
@@ -17,11 +17,6 @@ jobs:
             target: mediatek
             subtarget: filogic
             vermagic: "d649d775435da5a8637f7a955a80d331"
-          - tag: "24.10.0-rc6"
-            pkgarch: aarch64_cortex-a53
-            target: mediatek
-            subtarget: filogic
-            vermagic: "e62284b446fe7638f263008edcf81109"
 
     steps:
       - uses: actions/checkout@v4
