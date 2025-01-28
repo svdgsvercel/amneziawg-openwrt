@@ -3,15 +3,20 @@ name: Create Release on Tag
 on:
   push:
     tags:
-      - "v24.10.0-rc6"
+      - "v24.10.0-rc7"
 
 jobs:
   build:
     name: "v${{ matrix.build_env.tag }} - ${{ matrix.build_env.pkgarch}} :: ${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}} build"
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     strategy:
       matrix:
         build_env:
+          - tag: "24.10.0-rc7"
+            pkgarch: aarch64_cortex-a53
+            target: mediatek
+            subtarget: filogic
+            vermagic: "d649d775435da5a8637f7a955a80d331"
           - tag: "24.10.0-rc6"
             pkgarch: aarch64_cortex-a53
             target: mediatek
@@ -43,7 +48,7 @@ jobs:
 
           # Setup & install feeds
           wget https://downloads.openwrt.org/releases/${{ matrix.build_env.tag }}/targets/${{ matrix.build_env.target}}/${{ matrix.build_env.subtarget}}/feeds.buildinfo -O feeds.conf
-          echo "src-git awgopenwrt https://github.com/yury-sannikov/awg-openwrt.git" >> ./feeds.conf
+          echo "src-git awgopenwrt https://github.com/kaseat/amneziawg-openwrt.git" >> ./feeds.conf
           ./scripts/feeds update && ./scripts/feeds install -a
 
           # Setup config with AWG and dependencies
