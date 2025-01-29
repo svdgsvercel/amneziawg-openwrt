@@ -3,7 +3,7 @@ name: Create Release on Tag
 on:
   push:
     tags:
-      - "v24.10.0-rc7"
+      - "v24.10.0-rc5"
 
 jobs:
   build:
@@ -12,11 +12,11 @@ jobs:
     strategy:
       matrix:
         build_env:
-          - tag: "24.10.0-rc7"
-            pkgarch: aarch64_cortex-a53
-            target: mediatek
-            subtarget: filogic
-            vermagic: "d649d775435da5a8637f7a955a80d331"
+          - tag: "24.10.0-rc5"
+            pkgarch: mips_24kc
+            target: ramips
+            subtarget: mt7620
+            vermagic: "674889d6ea789689aa19ed9347e64242"
 
     steps:
       - uses: actions/checkout@v4
